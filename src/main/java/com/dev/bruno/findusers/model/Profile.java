@@ -1,5 +1,6 @@
 package com.dev.bruno.findusers.model;
 
+import org.elasticsearch.common.geo.GeoPoint;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
@@ -10,11 +11,11 @@ public class Profile {
     private String id;
     private String name;
     private String username;
-    private String location;
+    private GeoPoint location;
 
     public Profile(){}
 
-    public Profile(String id, String name, String username, String location) {
+    public Profile(String id, String name, String username, GeoPoint location) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -29,7 +30,7 @@ public class Profile {
         return name;
     }
 
-    public String getLocation() {
+    public GeoPoint getLocation() {
         return location;
     }
 
@@ -41,7 +42,7 @@ public class Profile {
         this.id = id;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(GeoPoint location) {
         this.location = location;
     }
 

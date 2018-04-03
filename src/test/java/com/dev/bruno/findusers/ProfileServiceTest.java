@@ -3,6 +3,7 @@ package com.dev.bruno.findusers;
 import com.dev.bruno.findusers.app.Application;
 import com.dev.bruno.findusers.model.Profile;
 import com.dev.bruno.findusers.service.ProfileService;
+import org.elasticsearch.common.geo.GeoPoint;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,7 +42,7 @@ public class ProfileServiceTest {
     @Test
     public void testSave() {
 
-        Profile profile = new Profile("1001", "Elasticsearch Basics", "Rambabu Posa", "23-FEB-2017");
+        Profile profile = new Profile("1001", "Elasticsearch Basics", "Rambabu Posa", new GeoPoint(51.500152D, -0.126236D));
         Profile testProfile = service.save(profile);
 
         assertNotNull(testProfile.getId());
@@ -54,7 +55,7 @@ public class ProfileServiceTest {
     @Test
     public void testFindOne() {
 
-        Profile profile = new Profile("1001", "Elasticsearch Basics", "Rambabu Posa", "23-FEB-2017");
+        Profile profile = new Profile("1001", "Elasticsearch Basics", "Rambabu Posa", new GeoPoint(51.500152D, -0.126236D));
         service.save(profile);
 
         Profile testProfile = service.findOne(profile.getId());
@@ -69,7 +70,7 @@ public class ProfileServiceTest {
     @Test
     public void testFindByUsername() {
 
-        Profile profile = new Profile("1001", "Elasticsearch Basics", "Rambabu Posa", "23-FEB-2017");
+        Profile profile = new Profile("1001", "Elasticsearch Basics", "Rambabu Posa", new GeoPoint(51.500152D, -0.126236D));
         service.save(profile);
 
         List<Profile> byUsername = service.findByUsername(profile.getUsername());
@@ -81,20 +82,20 @@ public class ProfileServiceTest {
 
         List<Profile> profileList = new ArrayList<>();
 
-        profileList.add(new Profile("1001", "Elasticsearch Basics", "Rambabu Posa", "23-FEB-2017"));
-        profileList.add(new Profile("1002", "Apache Lucene Basics", "Rambabu Posa", "13-MAR-2017"));
-        profileList.add(new Profile("1003", "Apache Solr Basics", "Rambabu Posa", "21-MAR-2017"));
-        profileList.add(new Profile("1007", "Spring Data + ElasticSearch", "Rambabu Posa", "01-APR-2017"));
-        profileList.add(new Profile("1008", "Spring Boot + MongoDB", "Mkyong", "25-FEB-2017"));
+        profileList.add(new Profile("1001", "Elasticsearch Basics", "Rambabu Posa", new GeoPoint(51.500152D, -0.126236D)));
+        profileList.add(new Profile("1002", "Apache Lucene Basics", "Rambabu Posa", new GeoPoint(51.500152D, -0.126236D)));
+        profileList.add(new Profile("1003", "Apache Solr Basics", "Rambabu Posa", new GeoPoint(51.500152D, -0.126236D)));
+        profileList.add(new Profile("1007", "Spring Data + ElasticSearch", "Rambabu Posa", new GeoPoint(51.500152D, -0.126236D)));
+        profileList.add(new Profile("1008", "Spring Boot + MongoDB", "Mkyong", new GeoPoint(51.500152D, -0.126236D)));
 
         profileList.forEach(profile -> {
             service.save(profile);
         });
 
-        Page<Profile> byName = service.findByName("Elasticsearch", new PageRequest(0, 10));
+        Page<Profile> byName = service.findByName("Elasticsearch", PageRequest.of(0, 10));
         assertThat(byName.getTotalElements(), is(2L));
 
-        Page<Profile> byName2 = service.findByName("Apache", new PageRequest(0, 10));
+        Page<Profile> byName2 = service.findByName("Apache", PageRequest.of(0, 10));
         assertThat(byName2.getTotalElements(), is(2L));
 
     }
@@ -102,7 +103,7 @@ public class ProfileServiceTest {
     @Test
     public void testDelete() {
 
-        Profile profile = new Profile("1001", "Elasticsearch Basics", "Rambabu Posa", "23-FEB-2017");
+        Profile profile = new Profile("1001", "Elasticsearch Basics", "Rambabu Posa", new GeoPoint(51.500152D, -0.126236D));
         service.save(profile);
         service.delete(profile);
 

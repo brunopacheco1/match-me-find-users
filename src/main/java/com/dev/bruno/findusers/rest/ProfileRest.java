@@ -2,7 +2,6 @@ package com.dev.bruno.findusers.rest;
 
 import com.dev.bruno.findusers.model.Profile;
 import com.dev.bruno.findusers.service.ProfileService;
-import com.dev.bruno.findusers.service.ProfileServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
