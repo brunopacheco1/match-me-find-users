@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ProfileRepository extends ElasticsearchRepository<Profile, String> {
 
-    Page<Profile> findByLocation(String author, Pageable pageable);
+    Page<Profile> findByName(String name, Pageable pageable);
 
-    List<Profile> findByName(String title);
+    List<Profile> findByUsername(String username);
 }

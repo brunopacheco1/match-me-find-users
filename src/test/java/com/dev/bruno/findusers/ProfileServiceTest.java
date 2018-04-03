@@ -28,14 +28,14 @@ public class ProfileServiceTest {
     private ProfileService service;
 
     @Autowired
-    private ElasticsearchTemplate esTemplate;
+    private ElasticsearchTemplate elasticTemplate;
 
     @Before
     public void before() {
-        esTemplate.deleteIndex(Profile.class);
-        esTemplate.createIndex(Profile.class);
-        esTemplate.putMapping(Profile.class);
-        esTemplate.refresh(Profile.class);
+        elasticTemplate.deleteIndex(Profile.class);
+        elasticTemplate.createIndex(Profile.class);
+        elasticTemplate.putMapping(Profile.class);
+        elasticTemplate.refresh(Profile.class);
     }
 
     @Test
@@ -67,17 +67,17 @@ public class ProfileServiceTest {
     }
 
     @Test
-    public void testFindByTitle() {
+    public void testFindByUsername() {
 
         Profile profile = new Profile("1001", "Elasticsearch Basics", "Rambabu Posa", "23-FEB-2017");
         service.save(profile);
 
-        List<Profile> byTitle = service.findByName(profile.getName());
-        assertThat(byTitle.size(), is(1));
+        List<Profile> byUsername = service.findByUsername(profile.getUsername());
+        assertThat(byUsername.size(), is(1));
     }
 
     @Test
-    public void testFindByAuthor() {
+    public void testFindByName() {
 
         List<Profile> profileList = new ArrayList<>();
 
@@ -91,11 +91,11 @@ public class ProfileServiceTest {
             service.save(profile);
         });
 
-        Page<Profile> byLocation = service.findByLocation("Rambabu Posa", new PageRequest(0, 10));
-        assertThat(byLocation.getTotalElements(), is(4L));
+        Page<Profile> byName = service.findByName("Elasticsearch", new PageRequest(0, 10));
+        assertThat(byName.getTotalElements(), is(2L));
 
-        Page<Profile> byLocation2 = service.findByLocation("Mkyong", new PageRequest(0, 10));
-        assertThat(byLocation2.getTotalElements(), is(1L));
+        Page<Profile> byName2 = service.findByName("Apache", new PageRequest(0, 10));
+        assertThat(byName2.getTotalElements(), is(2L));
 
     }
 
@@ -105,7 +105,9 @@ public class ProfileServiceTest {
         Profile profile = new Profile("1001", "Elasticsearch Basics", "Rambabu Posa", "23-FEB-2017");
         service.save(profile);
         service.delete(profile);
+
         Profile testProfile = service.findOne(profile.getId());
+
         assertNull(testProfile);
     }
 }

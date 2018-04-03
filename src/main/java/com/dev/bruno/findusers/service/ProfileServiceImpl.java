@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProfileServiceImpl implements ProfileService {
@@ -24,18 +25,24 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     public Profile findOne(String id) {
-        return repository.findById(id).get();
+        Optional<Profile> optionalProfile = repository.findById(id);
+
+        if(optionalProfile.isPresent()) {
+            return optionalProfile.get();
+        }
+
+        return null;
     }
 
     public Iterable<Profile> findAll() {
         return repository.findAll();
     }
 
-    public Page<Profile> findByLocation(String author, PageRequest pageRequest) {
-        return repository.findByLocation(author, pageRequest);
+    public Page<Profile> findByName(String name, PageRequest pageRequest) {
+        return repository.findByName(name, pageRequest);
     }
 
-    public List<Profile> findByName(String title) {
-        return repository.findByName(title);
+    public List<Profile> findByUsername(String username) {
+        return repository.findByUsername(username);
     }
 }

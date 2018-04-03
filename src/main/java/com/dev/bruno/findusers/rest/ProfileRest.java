@@ -16,7 +16,7 @@ public class ProfileRest {
     private ProfileService service;
 
     @RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
-    public Optional<Profile> get(@PathVariable(value="id") String id) {
+    public Profile get(@PathVariable(value="id") String id) {
         return service.findOne(id);
     }
 
