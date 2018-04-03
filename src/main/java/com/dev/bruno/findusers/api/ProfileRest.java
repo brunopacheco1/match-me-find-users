@@ -1,12 +1,10 @@
-package com.dev.bruno.findusers.rest;
+package com.dev.bruno.findusers.api;
 
 import com.dev.bruno.findusers.model.Profile;
 import com.dev.bruno.findusers.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class ProfileRest {

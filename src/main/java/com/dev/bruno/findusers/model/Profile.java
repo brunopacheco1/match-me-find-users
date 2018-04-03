@@ -4,7 +4,7 @@ import org.elasticsearch.common.geo.GeoPoint;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-@Document(indexName = "match-me", type = "profile")
+@Document(indexName = "${elastic.index}", type = "profile")
 public class Profile {
 
     @Id

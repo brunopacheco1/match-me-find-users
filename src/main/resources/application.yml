@@ -8,3 +8,8 @@ spring.profiles.active: dev
 # HTTP Server
 server:
   port: 3100
+
+spring:
+  data:
+    jest:
+      uri: http://${ELASTIC_HOST}

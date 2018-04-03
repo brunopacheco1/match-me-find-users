@@ -1,6 +1,5 @@
 package com.dev.bruno.findusers;
 
-import com.dev.bruno.findusers.app.Application;
 import com.dev.bruno.findusers.model.Profile;
 import com.dev.bruno.findusers.service.ProfileService;
 import org.elasticsearch.common.geo.GeoPoint;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -29,14 +29,14 @@ public class ProfileServiceTest {
     private ProfileService service;
 
     @Autowired
-    private ElasticsearchTemplate elasticTemplate;
+    private ElasticsearchOperations elasticsearchOperations;
 
     @Before
     public void before() {
-        elasticTemplate.deleteIndex(Profile.class);
-        elasticTemplate.createIndex(Profile.class);
-        elasticTemplate.putMapping(Profile.class);
-        elasticTemplate.refresh(Profile.class);
+        elasticsearchOperations.deleteIndex(Profile.class);
+        elasticsearchOperations.createIndex(Profile.class);
+        elasticsearchOperations.putMapping(Profile.class);
+        elasticsearchOperations.refresh(Profile.class);
     }
 
     @Test
