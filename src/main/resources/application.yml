@@ -1,0 +1,10 @@
+# Spring properties
+spring:
+  application:
+    name: match-me-find-users
+
+spring.profiles.active: dev
+
+# HTTP Server
+server:
+  port: 3100

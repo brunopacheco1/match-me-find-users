@@ -1,0 +1,3 @@
+elasticsearch.clustername: docker-cluster
+elasticsearch.host: elasticsearch
+elasticsearch.port: 9300
