@@ -1,3 +1,2 @@
 elastic.clustername: docker-cluster
-elastic.port: 9300
 elastic.index: match-me
