@@ -13,14 +13,14 @@ addons:
 script:
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar;
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker build -t "$DOCKER_USERNAME/match-me-find-user" .;
+    docker build -t "$DOCKER_USERNAME/match-me-find-users" .;
     else
-    docker build -t "$DOCKER_USERNAME/match-me-find-user:$TRAVIS_BRANCH" .;
+    docker build -t "$DOCKER_USERNAME/match-me-find-users:$TRAVIS_BRANCH" .;
     fi
 after_success:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker push "$DOCKER_USERNAME/match-me-find-user:latest";
+    docker push "$DOCKER_USERNAME/match-me-find-users:latest";
     else
-    docker push "$DOCKER_USERNAME/match-me-find-user:$TRAVIS_BRANCH";
+    docker push "$DOCKER_USERNAME/match-me-find-users:$TRAVIS_BRANCH";
     fi
